@@ -1,0 +1,51 @@
+https://stackoverflow.com/questions/44363300/gcc-optimization-issues-and-behavior
+
+
+When compiling with gcc, higher optimization levels like -O1 can expose more errors (often called "bugs") in your code that are hidden when using no optimization (-O0). This happens because the optimizer makes assumptions about program behavior that are only valid if your code adheres to the C/C++ language standard, especially regarding undefined behavior. 
+Stack Overflow
+Stack Overflow
+ +2
+With -O1 optimization enabled:
+Undefined Behavior (UB) is Exploited: The compiler assumes that undefined behavior (such as dereferencing a null pointer, using uninitialized variables, or violating strict aliasing rules) never occurs. When it encounters code that suggests UB, it may optimize away entire code paths or make incorrect assumptions about the state of variables, leading to unexpected results or crashes that didn't happen at -O0.
+Code Reordering and Elimination: Optimizations like dead code elimination and constant propagation, which are enabled at -O1, can change the order of operations or remove code the compiler determines is unreachable or has no effect. This can reveal bugs related to timing-dependent code, uninitialized variables, or code that relies on a specific execution order not guaranteed by the standard.
+Linker Errors: Sometimes, aggressive inlining or dead code elimination can cause symbols (variables or functions) to be removed, leading to "undefined symbol" linker errors that were not present with -O0.
+Floating Point Inaccuracies: While more common at higher levels or with specific flags like -fassociative-math, optimizations can reorder floating-point operations, potentially leading to slight precision differences that expose bugs in sensitive numerical algorithms.
+Compiler Bugs (Rare): In very rare cases, the compiler itself might have a bug in a specific version that only manifests with certain optimizations. GCC is tested extensively at all levels, and these issues are typically fixed in later versions. 
+
+
+
+
+
+
+
+
+It is a common observation that higher optimization levels, such as GCC's -O1 or higher, can make existing errors or bugs in source code more apparent. The optimizations don't create new errors; rather, they expose latent bugs related to undefined behavior, race conditions, or incorrect assumptions that might go unnoticed at lower optimization levels like -O0. 
+Stack Overflow
+Stack Overflow
+ +4
+How -O1 and higher optimizations expose errors:
+Exploiting Undefined Behavior: The C and C++ standards allow compilers to assume that undefined behavior (UB) does not occur in a program. When optimizations are enabled, the compiler leverages this assumption to remove or reorder code it determines unreachable or unnecessary, which can alter program execution in unpredictable ways if UB does exist. For example, the compiler might optimize away a null pointer check if it assumes the pointer is never null, leading to a crash if it is, which would not happen at -O0 where the check might remain.
+Aggressive Code Analysis: Higher optimization levels perform deeper analysis, such as interprocedural analysis and value range propagation, to improve performance. This increased scrutiny can detect issues like array bounds violations or uninitialized variables that the compiler might otherwise miss.
+Memory Access Reordering (Volatile Variables): In embedded systems or multithreaded programming, optimizations can reorder memory operations. If variables shared between threads or used for hardware interaction are not declared volatile, the compiler might cache their values in registers or reorder reads/writes, leading to unexpected program behavior or failure.
+Floating-Point Inaccuracies: Optimizations might reorder floating-point operations (e.g., (A + B) - A might not equal B due to precision limits). The compiler may assume associativity to optimize expressions, which can lead to slight numerical inaccuracies that alter program flow, especially in comparison-based loops. 
+Stack Overflow
+Stack Overflow
+ +4
+Debugging Implications
+Because optimizations change the structure and order of the compiled code, a program that runs correctly with -O0 but fails with -O1 almost certainly contains a bug that should be fixed. Using a debug-specific optimization level like -Og (optimizes for debugging experience) or using tools like AddressSanitizer (ASAN) and UndefinedBehaviorSanitizer (UBSAN) with appropriate flags (they often recommend -O1 for best results) can help pinpoint the exact source of these underlying issues. 
+Reddit
+Reddit
+ +4
+Is it a gcc -O2 optimization bug (different result from -O1)?
+Apr 22, 2020 — Compilers - particularly gcc - are becoming more and more aggressive when it comes to treating undefined constructs. They are allo...
+
+Stack Overflow
+gcc shows different warnings depending on optimisation level
+Dec 18, 2019 — * 1 Answer. Sorted by: 8. Some optimization levels of gcc analyze the code a bit more deeply than others, which can also lead to t...
+
+Stack Overflow
+Different optimization levels lead to different results - Reddit
+Jan 23, 2022 — But one of the terms used to describe this is optimisation unstable code. A basic explanation is that the compiler has a large lis...
+
+Reddit
+Show all
