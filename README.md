@@ -3,9 +3,11 @@
 | <img src="https://raw.githubusercontent.com/BeAllAround/DeclLang/refs/heads/main/Logo/Logo-black-icon.png" alt="Decl Logo" width="50%" /> | <p width="50%"> In active (heavy) development </p> |
 | :----------------------------------------------------------: | :------------------------------------------------: |
 
+## Overview
+
 Decl is a dynamically-typed programming language that ***transpiles*** into a C++ API, implemented from scratch.
 
-The primary idea is source-to-source (**ahead of time**) compilation. At the same time, there is also a subset of the language that runs at runtime - as an interpreter. This combination enforces Decl to be a language that can be run both via a VM at runtime and natively at compile time. The compiler frontend and the language backend themselves have no (external) dependencies.
+The primary idea is source-to-source (**ahead of time**) compilation. At the same time, there is also a subset of the language that runs at runtime - as an interpreter. This combination enforces Decl to be a flexible language that can be run both via a VM at runtime and natively at compile time. The compiler frontend and the language backend themselves have no (external) dependencies.
 
 
 
