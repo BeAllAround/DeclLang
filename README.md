@@ -41,6 +41,24 @@ The source code from the videos is published at https://github.com/BeAllAround/S
 
 
 
+## Why C++11 Standard for Decl?
+
+While C++20 introduces powerful features such as `constinit` and `consteval`, which could improve the quality of the generated code, Decl deliberately avoids depending on the latest language standards.
+
+There are three primary reasons for this decision:
+
+- First, heavier use of new C++ features tends to increase backend compilation/build times, as modern compilers must perform more complex analysis and template instantiation.
+
+- Second, supporting a wide range of C++ standards (C++11 and later) improves compatibility and portability for users. The Decl compiler can generate code compatible with older standards while still allowing users who desire newer features to benefit from them through their chosen C++ compiler if they take the liberty of modifying the destination source.
+
+- Third, the Decl frontend compiler must generate clear, high-level errors itself rather than relying on the backend C++ compiler to generate those errors. Every time we leverage a particular C++ feature, the Decl compiler has to fully enforce all of its rules and constraints. In practice, this significantly increases maintenance burden and dramatically raises the overall complexity of the Decl compiler.
+
+The focus of future work remains on strengthening the Decl compiler itself. The goal is that **"Any optimization that _can be_ performed reliably at Decl compile time should be done there"**. If an effect can be achieved using C++11, there is little reason and motivation to rely on newer, more complex language features that would burden the backend compiler and, ultimately, reduce portability.
+
+Ultimately, whenever we optimize C or C++ code, we must examine the generated assembly. No matter how high-level the language appears, it is the low-level machine code that ultimately determines performance. This principle is shared by every programming language: the final arbiter is the machine itself. *In programming, the machine is the judge — humans are only the jury*.
+
+
+
 ## Usage Reference
 
 It is important to note that the semi-colon is optional, and is used by developers to mark the end of an expression for code readability. This gives the developer a flexible choice - use a semi-colon if desirable, or prefer the new line `\n` as the end of a definition or expression.
