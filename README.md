@@ -90,6 +90,20 @@ while(i < 10) {
 
 
 
+### If Statement
+
+```javascript
+decl i = 1;
+
+if(i >= 2) {
+    sys.print()
+}
+```
+
+
+
+
+
 ### Define a function
 
 ```javascript
@@ -103,6 +117,8 @@ func f1(a, b) {
 ### Short-circuit Evaluation
 
 When it comes to logical operators, Decl implements the short-circuit evaluation for the logical `AND(&&)` and `OR(||)` operators.
+
+> For more information, refer to [Short-circuit evaluation](https://en.wikipedia.org/wiki/Short-circuit_evaluation).
 
 ```javascript
 func func1() {
@@ -129,9 +145,17 @@ decl output = func1() && func2();
 
 Decl comes with the ready-to-use bundle of standard libraries used for general purpose programming.
 
-These include the following:
+#### The `sys` namespace
 
-- `sys.print(Value...)` - Print your Decl Value to the system I/O
-
-
+| Function Usage                   | Description                                                  |
+| -------------------------------- | ------------------------------------------------------------ |
+| `sys.print(Value...)`            | Print values to stdout                                       |
+| `sys.println(Value...)`          | Print values followed by a newline                           |
+| `sys.eprint(Value...)`           | Print to stderr                                              |
+| `sys.read_line() -> String`      | Read a full line from stdin                                  |
+| `sys.args() -> Array<String> `   | Get command-line arguments at runtime                        |
+| `sys.env(key: String) -> String` | Get the environment variable                                 |
+| `sys.sleep(ms: Number)`          | Sleep for the timeout specified (in milliseconds)            |
+| `sys.platform() -> String`       | `"linux"`, `"macos"`, `"windows"`, etc.                      |
+| `sys.exit(code: Number = 0)`     | Terminates the entire program from any point in the code and returns a status code to the operating system. |
 
