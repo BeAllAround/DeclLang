@@ -65,6 +65,24 @@ It is important to note that the semi-colon is optional, and is used by develope
 
 
 
+### Main Program
+
+All Decl code can run at the top level so there is no such thing as `main` function or similar. If you are really used to that kind of "main program" entry point, consider the following alternative:
+
+```javascript
+func main() {
+    decl args = sys.args();
+    
+    sys.println(args);
+    
+    return 0; // or sys.exit(0);
+}
+
+main();
+```
+
+
+
 ### Define a variable
 
 ```javascript
@@ -83,7 +101,7 @@ Types like Array and HashTable are dynamic types and can also be used as express
 ```javascript
 decl i = 0;
 while(i < 10) {
-    sys.print(i);
+    sys.println(i);
     i++;
 }
 ```
@@ -96,7 +114,7 @@ while(i < 10) {
 decl i = 1;
 
 if(i >= 2) {
-    sys.print()
+    sys.println()
 }
 ```
 
@@ -114,6 +132,27 @@ func f1(a, b) {
 
 
 
+### Built-In Types and Optimizations
+
+All of the built-in types are highly optimized to deliver the maximum runtime performance with various optimizations also performed at compile-time when possible.
+
+One of these optimizations is the **ahead-of-time** optimization where the Decl frontend compiler eliminates the switch case dispatch, significally increasing the performance runtime overhead for hot and sensitive core operations such as `lessThan`, `postfixIncrement`, etc. Such optimization is applicable in the case of a literal value and if a variable is determined as **_"of one type"_** during the compile-time static analysis.
+
+```javascript
+decl a = 1; // Number: Either Float, Double, or Integer
+decl str = "MyDeclString"; // String
+decl boolean = true; // Boolean
+decl n = nill; // Null equiavalnt in other languages. This literal represents the intentional absence of any object value
+decl arr = [1, 2, 3]; // Array Definition
+decl hash_table = {'a': 1, 'b': 2 }; // Hash Table (Dictionary) Definition
+```
+
+
+
+
+
+
+
 ### Short-circuit Evaluation
 
 When it comes to logical operators, Decl implements the short-circuit evaluation for the logical `AND(&&)` and `OR(||)` operators.
@@ -122,12 +161,12 @@ When it comes to logical operators, Decl implements the short-circuit evaluation
 
 ```javascript
 func func1() {
-    sys.print("func1() called!");
+    sys.println("func1() called!");
     return 0;
 }
 
 func func2() {
-    sys.print("func2() called!");
+    sys.println("func2() called!");
     return 0;
 }
 
