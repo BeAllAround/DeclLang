@@ -1,6 +1,6 @@
 # DeclLang
 
-| <img src="https://raw.githubusercontent.com/BeAllAround/DeclLang/refs/heads/main/Logo/Logo-black-icon.png" alt="Decl Logo" width="300" /> | **In active (heavy) development** |
+| <img src="https://raw.githubusercontent.com/BeAllAround/DeclLang/refs/heads/main/Logo/Logo-black-icon.png" alt="Decl Logo" width="50%" /> | **In active (heavy) development** |
 | ------------------------------------------------------------ | --------------------------------- |
 
 Decl is a dynamically-typed programming language that ***transpiles*** into a C++ API, implemented from scratch.
