@@ -5,7 +5,7 @@
 
 Decl is a dynamically-typed programming language that ***transpiles*** into a C++ API, implemented from scratch.
 
-The primary idea is source-to-source (ahead of time) compilation. At the same time, there is also a subset of the language that runs at runtime - as an interpreter. This enforces Decl to be a language that can be run both via a VM at runtime and natively at compile time. The compiler frontend and the language backend themselves have no dependencies.
+The primary idea is source-to-source (ahead of time) compilation. At the same time, there is also a subset of the language that runs at runtime - as an interpreter. This enforces Decl to be a language that can be run both via a VM at runtime and natively at compile time. The compiler frontend and the language backend themselves have no (external) dependencies.
 
 
 
