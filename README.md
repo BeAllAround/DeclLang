@@ -90,10 +90,6 @@ while(i < 10) {
 
 
 
-
-
-
-
 ### Define a function
 
 ```javascript
@@ -104,13 +100,38 @@ func f1(a, b) {
 
 
 
+### Short-circuit Evaluation
+
+When it comes to logical operators, Decl implements the short-circuit evaluation for the logical `AND(&&)` and `OR(||)` operators.
+
+```javascript
+func func1() {
+    sys.print("func1() called!");
+    return 0;
+}
+
+func func2() {
+    sys.print("func2() called!");
+    return 0;
+}
+
+decl a = 0 || 2; // Holds 2
+
+// Note: "func1() called" printed. In which case, the func2() call is never evaluated
+decl output = func1() && func2();
+```
+
+
+
+
+
 ### Built-In Functions and Namespaces
 
 Decl comes with the ready-to-use bundle of standard libraries used for general purpose programming.
 
 These include the following:
 
-
+- `sys.print(Value...)` - Print your Decl Value to the system I/O
 
 
 
