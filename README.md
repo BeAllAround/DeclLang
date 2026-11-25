@@ -11,7 +11,7 @@ The primary idea is source-to-source (ahead of time) compilation. At the same ti
 
 
 
-The runtime version of the language allows the developer to rapidly run and test their programs without heavy optimizations, which enables rapid development with the concept of **_"Only build your code for production when you need to"_**.
+The runtime version of the language allows the developer to rapidly run and test their programs without heavy optimizations, which enables rapid development with the concept being **_"Only build your code for production when you need to"_**.
 
 
 
