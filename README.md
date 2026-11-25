@@ -1,6 +1,6 @@
 # DeclLang
 
-| <img src="https://raw.githubusercontent.com/BeAllAround/DeclLang/refs/heads/main/Logo-black-icon.png" alt="Decl" style="zoom:15%;" /> | In active (heavy) development |
+| ![Decl](https://raw.githubusercontent.com/BeAllAround/DeclLang/refs/heads/main/Logo/Logo-black-icon01.png) | In active (heavy) development |
 | ------------------------------------------------------------ | ----------------------------- |
 
 
