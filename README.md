@@ -31,6 +31,16 @@ Decl supports the interactive shell that allows developers to run and test any D
 
 
 
+## C++ Motivation
+
+The motivation for most (if not all) of my research content is inspired by Decl as I have made most of these performance improvements during the development, designing, testing, and debugging of Decl. It has been a 2+ year progress as once you came up with a design, you are pretty much stuck with it forever, especially with the main focus on high performance.
+
+To check out my YouTube channel, please visit: https://www.youtube.com/@AlexMilenkovic-ks7xd
+
+The source code from the videos is published at https://github.com/BeAllAround/S2S-Compilers-Blog-Series-Public; related write-ups on https://dev.to/alex01.
+
+
+
 ## Usage Reference
 
 It is important to note that the semi-colon is optional, and is used by developers to mark the end of an expression for code readability. This gives the developer a flexible choice - use a semi-colon if desirable, or prefer the new line `\n` as the end of a definition or expression.
