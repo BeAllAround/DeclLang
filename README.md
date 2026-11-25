@@ -1,6 +1,6 @@
 # DeclLang
 
-| ![Decl](https://raw.githubusercontent.com/BeAllAround/S2S-Compilers-Blog-Series-Public/refs/heads/main/Logo-DeCL_black-icon01.png) | In active (heavy) development |
+| <img src="https://raw.githubusercontent.com/BeAllAround/DeclLang/refs/heads/main/Logo-black-icon.png" alt="Decl" style="zoom:15%;" /> | In active (heavy) development |
 | ------------------------------------------------------------ | ----------------------------- |
 
 
