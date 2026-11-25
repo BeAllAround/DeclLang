@@ -159,3 +159,33 @@ Decl comes with the ready-to-use bundle of standard libraries used for general p
 | `sys.platform() -> String`       | `"linux"`, `"macos"`, `"windows"`, etc.                      |
 | `sys.exit(code: Number = 0)`     | Terminates the entire program from any point in the code and returns a status code to the operating system. |
 
+
+
+#### Filesystem (`fs` namespace)
+
+| Function                                       | Description                                                  |
+| ---------------------------------------------- | ------------------------------------------------------------ |
+| `fs.read(path: String) -> String`              | Read the entire contents of a file as a string.              |
+| `fs.read_bytes(path: String) -> Array`         | Read the entire contents of a file as raw bytes.             |
+| `fs.write(path: String, content: String)`      | Write a string to a file, overwriting it if it already exists. |
+| `fs.write_bytes(path: String, content: Array)` | Write raw bytes to a file, overwriting it if it already exists. |
+| `fs.append(path: String, content: String)`     | Append a string to the end of a file (creates the file if it does not exist). |
+| `fs.exists(path: String) -> Boolean`           | Return whether a file or directory exists at the given path. |
+| `fs.is_file(path: String) -> Boolean`          | Return whether the path exists and is a regular file.        |
+| `fs.is_dir(path: String) -> Boolean`           | Return whether the path exists and is a directory.           |
+| `fs.list(path: String) -> Array<String>`       | List the names of entries in a directory.                    |
+| `fs.mkdir(path: String)`                       | Create a directory at the given path.                        |
+| `fs.remove(path: String)`                      | Delete a file or empty directory.                            |
+| `fs.rename(from: String, to: String)`          | Rename or move a file or directory.                          |
+
+
+
+#### Time (`time` namespace)
+
+| Function                                         | Description                                                  |
+| ------------------------------------------------ | ------------------------------------------------------------ |
+| `time.now() -> Number`                           | Return the current Unix timestamp in milliseconds.           |
+| `time.now_iso() -> String`                       | Return the current time as an ISO 8601 formatted string.     |
+| `time.sleep(ms: Number)`                         | Pause execution for the given number of milliseconds (or keep this only in sys). |
+| `time.format(ts: Number, fmt: String) -> String` | Format a Unix timestamp according to the given format string. |
+| `time.parse(s: String, fmt: String) -> Number`   | Parse a formatted time string into a Unix timestamp (milliseconds). Returns None on failure. |
