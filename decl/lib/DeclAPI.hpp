@@ -653,6 +653,7 @@ namespace DeclAPI
             Value() {
                 // type = ValueType::Null;
                 // _null = nullptr;
+                // NOTE: Might result in UNINITIALIZED VALUE UNION? With only (ValueType type) being assigned?
             }
 
 
