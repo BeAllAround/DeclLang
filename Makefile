@@ -20,6 +20,7 @@ run_parser_tests:
 
 run_api_tests:
 	g++ tests/api/main.cpp -o out.out -I ~/Project -I./ -Wno-maybe-uninitialized -Wunreachable-code -Wold-style-cast -Wall -Werror --std=c++11 -O1 && ./out.out
+
 run_runtime_tests:
 	g++ tests/astruntime/main.cpp -o out.out -I ~/Project -I./ -Wunreachable-code -Wold-style-cast -Wall -Werror --std=c++11 -O1 && ./out.out
 

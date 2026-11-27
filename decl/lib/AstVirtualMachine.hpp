@@ -242,6 +242,13 @@ namespace AstVirtualMachine {
 
             size_t block_size = node_block->block_size();
 
+            if(block_size == 0) {
+              return RuntimeEntry(
+                RuntimeEntryWhence::IGNORED,
+                Null()
+              );
+            }
+
             for(size_t i = 0; i < block_size - 1; i++) {
 
             }

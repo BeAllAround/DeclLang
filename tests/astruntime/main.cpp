@@ -35,8 +35,78 @@ bool compareValues(const Value& left, const Value& right) {
         return left.get_num().n == right.get_num().n;
     }
 
-    return false;
+    return left.type == right.type;
 }
+
+#define TEST_DECL_PROGRAM_AND_COMPARE(SOURCE_CODE, VALUE) ({ \
+      /* START: SETTING UP CONTEXT */                        \
+      UniquePtr<Context> shrd_context = makeUniqueContext(); \
+      Context* context = obj_cast<Context*>(shrd_context.get()); \
+                                                                \
+      setUpContext(context);                                    \
+      setUpBuilts(context);                                     \
+      /* END: SETTING UP CONTEXT */                             \
+                                                                \
+      /* START: SETTING UP AST PARSER AND ERROR HANDLING */     \
+      AstGenerator ast_generator;                               \
+      NodeParser node_parser;                                   \
+      const std::string &source_code = (SOURCE_CODE);           \
+      ast_generator.set_source(source_code.c_str());            \
+      ast_generator.attach_context(context);                    \
+      assertm("Block Stack Empty", ast_generator.block_stack.size() == 0); \
+      SmartASTNode ast_root = ast_generator.parse();                        \
+      assertm("Block Stack Clearned", ast_generator.block_stack.size() == 0); \
+      const auto& errors = ast_generator.get_syntax_errors();                   \
+      if(errors.size() != 0) { Logger::info("----------START ERROR----------"); } \
+      for (size_t i = 0; i < errors.size(); i++) {                                \
+        const SyntaxError &syntax_error = errors[i];                              \
+        Logger::info(syntax_error.get_error());                                    \
+      }                                                                             \
+      if(errors.size() != 0) { Logger::info("----------END ERROR----------"); }     \
+                                                                                    \
+      std::string result = node_parser.node_to_string(ast_root);                    \
+      Logger::info(result);                                                         \
+      assertm("Must NOT Contain Errors", errors.size() == 0);                       \
+      /* END: SETTING UP AST PARSER AND ERROR HANDLING */                           \
+                                                                                    \
+                                                                                    \
+      /* START: SETTING UP AstEvaluator */                                          \
+      AstEvaluator ast_evaluator = AstEvaluator();                                  \
+      ast_evaluator.attach_context(context);                                        \
+      /* END: SETTING UP AstEvaluator */                                            \
+                                                                                    \
+      std::string err_message;                                                      \
+      /* NOTE: Try/Catch NOT allowed in a statement expression */                   \
+      ([&]() {                                                                      \
+      try {                                                                         \
+        RuntimeEntry output = ast_evaluator.evaluateProgramNode(ast_root);          \
+        assertm("Scope Stack zero emptied if eval OK",                              \
+            ast_evaluator.runtime_scope_stack.size() == 0                           \
+        );                                                                          \
+        /* TODO: Replace this with printValue */                                    \
+        /* Logger::info("output.val", output.val.get_num().n); */                   \
+                                                                                    \
+        assertm(                                                                    \
+            "Ouput Matches",                                                        \
+            compareValues(output.val, (VALUE))                                      \
+        );                                                                          \
+      }                                                                             \
+      catch(const Exception& error) {                                               \
+        err_message = error.message;                                                \
+                                                                                    \
+        std::cout << "Exception thrown at " << __FILE__ << ":" << CURRENT_LINE_STR << ' ' << err_message << std::endl;  \
+                                                                                    \
+        /* Make sure that ast_evalutor.runtime_scope_stack is not empty if an exception is thrown. This helps with the stack trace */ \
+        assertm("Scope Stack NOT ZERO IF A (RUNTIME) EXCEPTION IS THROWN",          \
+            ast_evaluator.runtime_scope_stack.size() != 0                           \
+        );                                                                          \
+      }                                                                             \
+      })();                                                                         \
+                                                                                    \
+      assertm("Program OK | Ensure No Exceptions thrown during runtime",            \
+        err_message.size() == 0                                                     \
+      );                                                                            \
+})
 
 int main() {
 
@@ -122,6 +192,13 @@ int main() {
       
     }
 
+
+  }
+
+  TEST_BLOCK("Basic Expressions") {
+    TEST_DECL_PROGRAM_AND_COMPARE("R()", Null()); // Empty String as a Program OK
+
+    TEST_DECL_PROGRAM_AND_COMPARE(R"(5 + 5)", makeNumber(10));
 
   }
 

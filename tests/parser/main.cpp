@@ -21,7 +21,7 @@
 using namespace AstParser;
 
 
-// TODO: Maybe a function? BUT THIS IS PROBABLY BETTER AS WE GET THE EXACT LINE IN THE CASE OF THE FAILED ASSERTION AFTER THE MACRO GETS REPLACED
+// TODO: Maybe a function? BUT THIS IS, BY FAR, MORE EFFECTIVE AS WE GET THE EXACT LINE IN THE CASE OF THE FAILED ASSERTION AFTER THE MACRO GETS REPLACED
 #define BASIC_AST_TEST(_source, _ast_output) ({                  \
   UniquePtr<Context> shrd_context = makeUniqueContext();                   \
   Context* main_context = obj_cast<Context*>(shrd_context.get()); \
