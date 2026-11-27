@@ -15,7 +15,7 @@
 # -static-libstdc++ -static-libgcc -static
 # For more, see https://gcc.gnu.org/onlinedocs/gcc-7.3.0/gcc/Link-Options.html
 
-# With valgrind -s ./out when using -static, we are getting various "Conditional jump or move depends on uninitialised value(s)" errors (from std::cout and libc startup, etc.) but these are considered false positives as long as our program doesn't cause memory leaks, and mostly importanly, - does not crash.
+# With valgrind -s ./out when using -static, we are getting various "Conditional jump or move depends on uninitialised value(s)" errors (from std::cout and libc startup, etc.) but these are considered false positives as long as our program doesn't cause memory leaks, and mostly importanly, - does not crash, resulting in UB (Undefined Behaviour) and similar.
 # We also get these false positives with ska::detailv3::sherwood_v3_table but It is not an indication of a real bug in your program or of undefined behavior that will bite you in practice; the library is written this way deliberately for speed and is widely used.
 
 
