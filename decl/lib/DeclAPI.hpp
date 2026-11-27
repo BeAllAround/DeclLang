@@ -1044,6 +1044,12 @@ namespace DeclAPI
 
         _Context() {
             offset_table = offset_symbol_lookup_table(); // NOT NEEDED BUT SOME HASH TABLE IMPLEMENTATIONS MIGHT REQUIRE IT IF THE CONSTRUCTOR IS EXPLICIT?
+            // offset_table.reserve(10);
+            // offset_table.reserve(10) RESOLVES the following when compiling with -static: "Conditional jump or move depends on uninitialised value(s)"
+            //==17643==    by 0x41755A: DeclAPI::_Context<DeclAPI::CustomMemoryManagement>::insert_if_not_and_get_symbol_offset(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /home/alex/Project/DeclLang/out.out)
+            // ==17643==    by 0x4062BC: DeclAPI::setUpContext(DeclAPI::_Context<DeclAPI::CustomMemoryManagement>*) (in /home/alex/Project/DeclLang/out.out)
+            // ==17643==    by 0x4080E2: main (in /home/alex/Project/DeclLang/out.out)
+
         }
 
         /*

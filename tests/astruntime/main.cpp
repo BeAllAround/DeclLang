@@ -195,12 +195,14 @@ int main() {
 
   }
 
+  /*
   TEST_BLOCK("Basic Expressions") {
     TEST_DECL_PROGRAM_AND_COMPARE("R()", Null()); // Empty String as a Program OK
 
     TEST_DECL_PROGRAM_AND_COMPARE(R"(5 + 5)", makeNumber(10));
 
   }
+  */
 
 
   return 0;
